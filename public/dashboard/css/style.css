@@ -1,0 +1,128 @@
+.prog-indicator {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.prog-indicator-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+    position: relative;
+}
+
+.prog-indicator-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    width: 100%;
+    height: 2px;
+    background: #e9ecef;
+}
+
+.prog-indicator-item.active::after {
+    background: rgb(112 47 102);
+}
+
+.prog-indicator-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e9ecef;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.prog-indicator-item.active .prog-indicator-number {
+    background: rgb(112 47 102);
+    color: white;
+}
+
+.prog-indicator-text {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.prog-indicator-item.active .prog-indicator-text {
+    color: rgb(112 47 102);
+    font-weight: bold;
+}
+
+.border-dashed {
+    border-style: dashed !important;
+}
+
+.upload-area:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.text-purple {
+    color: rgb(112 47 102);
+}
+.bg-purple{
+    background-color: rgb(112 47 102) !important;
+    color: white;
+}
+.btn-purple {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:hover {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:active {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:focus {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled:hover {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled:active {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled:focus {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled:disabled {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled:disabled:hover {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled:disabled:active {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled:disabled:focus {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+.btn-purple:disabled:disabled:disabled {
+    background-color: rgb(112 47 102);
+    color: white;
+}
+
+
+
