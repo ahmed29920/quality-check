@@ -13,7 +13,7 @@
                 </a>
             </div>
             <div class="col-6 text-end">
-                <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
+                <a href="{{ route('admin.products.create') }}" class="btn btn-purple">
                     <i class="fa fa-plus"></i> {{ __('Add Product') }}
                 </a>
             </div>
@@ -180,7 +180,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">{{ __('Apply Filters') }}</button>
+                    <button type="submit" class="btn btn-purple w-100">{{ __('Apply Filters') }}</button>
                     <a href="{{ route('admin.products.index') }}"
                         class="btn btn-secondary w-100 mt-2">{{ __('Reset') }}</a>
                 </form>

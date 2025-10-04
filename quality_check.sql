@@ -253,7 +253,7 @@ CREATE TABLE `users` (
   `verification_code_expires_at` timestamp NULL DEFAULT NULL,
   `is_verified` tinyint(1) NOT NULL DEFAULT '0',
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `phone_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -264,7 +264,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `uuid`, `name`, `email`, `phone`, `role`, `image`, `verification_code`, `verification_code_expires_at`, `is_verified`, `is_active`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+INSERT INTO `users` (`id`, `uuid`, `name`, `email`, `phone`, `role`, `image`, `verification_code`, `verification_code_expires_at`, `is_verified`, `is_active`, `phone_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, '1dc707b7-d478-4ce5-aab7-34ef91ca27ec', 'admin', 'admin@admin.com', '+20123456789', 'admin', 'profile-images/a9xmTXHa2WCoUSvCRRR2Y7zhPZH1WzjAiJS1w50o.jpg', NULL, NULL, 1, 1, '2025-10-02 11:00:41', '$2y$12$XrSnX9BOml/V1MptoFebYeIxv15ci0TVitgVCCqWwaLJ28Uc27sQq', 'FgY87RwHsAXJwmrGf8bFqEyATsaGQ9iLUDNqYHET2z2mm15ZX7SMpxJJUiVQ', '2025-10-02 08:00:30', '2025-10-02 09:19:18');
 
 --

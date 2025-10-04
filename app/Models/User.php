@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +29,9 @@ class User extends Authenticatable
         'image',
         'verification_code',
         'verification_code_expires_at',
-        'email_verified_at',
+        'phone_verified_at',
+        'is_active',
+        'is_verified',
     ];
 
     /**
@@ -52,7 +55,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            'phone_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_active' => 'boolean',
             'is_verified' => 'boolean',
@@ -64,5 +67,12 @@ class User extends Authenticatable
         static::creating(function ($model) {
             $model->uuid = Str::uuid();
         });
+    }
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image ? asset('storage/' . $this->image) : asset('dashboard/img/placeholder/no-image.png');
     }
 }

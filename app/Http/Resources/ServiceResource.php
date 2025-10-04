@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class ServiceResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => [
+                'en' => $this->getTranslation('name', 'en'),
+                'ar' => $this->getTranslation('name', 'ar'),
+            ],
+            'description' => [
+                'en' => $this->getTranslation('description', 'en'),
+                'ar' => $this->getTranslation('description', 'ar'),
+            ],
+            'slug' => $this->slug,
+            'image_url' => $this->image_url,
+            'price' => $this->price,
+            'duration' => $this->duration,
+            'is_active' => $this->is_active,
+            'is_pricable' => $this->is_pricable,
+            'category_id' => $this->category_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            
+            // Include relationships when loaded
+            'category' => $this->whenLoaded('category', function () {
+                return new CategoryResource($this->category);
+            }),
+            'questions_count' => $this->whenLoaded('mcqQuestions', function () {
+                return $this->mcqQuestions->count();
+            }),
+            'active_questions_count' => $this->whenLoaded('mcqQuestions', function () {
+                return $this->mcqQuestions->where('is_active', true)->count();
+            }),
+        ];
+    }
+}

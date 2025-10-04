@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset Request</title>
+    <title>Password Reset Code</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,31 +14,35 @@
             padding: 20px;
         }
         .header {
-            background: linear-gradient(45deg, #007bff, #0056b3);
+            background-color: #007bff;
             color: white;
             padding: 20px;
             text-align: center;
             border-radius: 8px 8px 0 0;
         }
         .content {
-            background: #f8f9fa;
+            background-color: #f8f9fa;
             padding: 30px;
             border-radius: 0 0 8px 8px;
         }
-        .button {
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 5px;
+        .code {
+            background-color: #e9ecef;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
             margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: #007bff;
         }
         .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 12px;
-            color: #666;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #6c757d;
         }
     </style>
 </head>
@@ -46,31 +50,31 @@
     <div class="header">
         <h1>Password Reset Request</h1>
     </div>
-
+    
     <div class="content">
-        <p>Hello,</p>
-
-        <p>We received a request to reset your password for your account. If you made this request, click the button below to reset your password:</p>
-
-        <div style="text-align: center;">
-            <a href="{{ $resetUrl }}" class="button">Reset My Password</a>
+        <h2>Hello {{ $user->name }},</h2>
+        
+        <p>You have requested to reset your password. Please use the following code to complete your password reset:</p>
+        
+        <div class="code">
+            {{ $resetCode }}
         </div>
-
+        
         <p><strong>Important:</strong></p>
         <ul>
-            <li>This link will expire in 1 hour for security reasons</li>
+            <li>This code will expire in 5 minutes</li>
+            <li>Do not share this code with anyone</li>
             <li>If you didn't request this password reset, please ignore this email</li>
-            <li>Your password will not be changed until you click the link above and create a new one</li>
         </ul>
-
-
-        <p>If you need any assistance, please contact our support team.</p>
-
-        <p>Best regards,<br>Your Quality Check Team</p>
+        
+        <p>If you need assistance, please contact our support team.</p>
+        
+        <p>Best regards,<br>
+        Quality Check Team</p>
     </div>
-
+    
     <div class="footer">
-        <p>This email was sent automatically. Please do not reply to this email.</p>
+        <p>This is an automated message. Please do not reply to this email.</p>
     </div>
 </body>
 </html>

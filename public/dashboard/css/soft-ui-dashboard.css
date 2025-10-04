@@ -5778,7 +5778,7 @@ fieldset:disabled .btn {
     --bs-pagination-padding-x: 0.75rem;
     --bs-pagination-padding-y: 0.375rem;
     --bs-pagination-font-size: 1rem;
-    --bs-pagination-color: #f97316;
+    --bs-pagination-color: #702f66;
     --bs-pagination-bg: #fff;
     --bs-pagination-border-width: 1px;
     --bs-pagination-border-color: #d4d4d8;
@@ -5790,8 +5790,8 @@ fieldset:disabled .btn {
     --bs-pagination-focus-bg: #e3e3e7;
     --bs-pagination-focus-box-shadow: 0 0 0 0.2rem rgba(249, 115, 22, 0.25);
     --bs-pagination-active-color: #fff;
-    --bs-pagination-active-bg: #f97316;
-    --bs-pagination-active-border-color: #f97316;
+    --bs-pagination-active-bg: #702f66;
+    --bs-pagination-active-border-color: #702f66;
     --bs-pagination-disabled-color: #52525b;
     --bs-pagination-disabled-bg: #fff;
     --bs-pagination-disabled-border-color: #d4d4d8;
@@ -22986,8 +22986,8 @@ fieldset:disabled .btn {
 }
 
 .form-switch .form-check-input:checked {
-    border-color: rgba(24, 24, 27, 0.95);
-    background-color: rgba(24, 24, 27, 0.95);
+    border-color: rgb(112 47 102);
+    background-color: rgb(112 47 102);
 }
 
 .form-select {
@@ -24618,7 +24618,7 @@ html {
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
-    background-image: linear-gradient(310deg, #f97316 0%, #f97316 100%);
+    background-image: linear-gradient(310deg, rgb(112 47 102) 0%, rgb(112 47 102) 100%);
     color: #fff;
 }
 
@@ -25047,6 +25047,7 @@ html {
 }
 
 .page-item.active .page-link {
+    color: #fff;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.09), 0 2px 3px -1px rgba(0, 0, 0, 0.07);
 }
 
@@ -27974,14 +27975,43 @@ pre[class*=language-] {
 .dataTables_wrapper .dataTables_length {
     float: left;
 }
+
 .rtl .dataTables_wrapper .dataTables_length {
     float: right !important;
 }
+
 .dataTables_wrapper .dataTables_filter {
     float: right;
     text-align: right;
 }
+
 .rtl .dataTables_wrapper .dataTables_filter {
     float: left;
     text-align: left;
 }
+
+
+
+.btn-neon {
+    position: relative;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    background: rgb(112, 47, 102);
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-neon:hover {
+    color: #fff;
+    background: rgb(112, 47, 102) !important;
+    box-shadow: 0 0 10px rgba(112, 47, 102, 0.8),
+                0 0 20px rgba(112, 47, 102, 0.8),
+                0 0 40px rgba(112, 47, 102, 0.7),
+                0 0 80px rgba(112, 47, 102, 0.6) !important;
+    transform: scale(1.05) !important;
+  }
+  

@@ -4,6 +4,45 @@
     <div class="row">
         <div class="col-lg-6 col-12">
             <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="row">
+                        {{-- Statistics Cards --}}
+                        <div class="row mb-4">
+                            <div class="col-md">
+                                <div class="card border-0 shadow-sm text-center">
+                                    <div class="card-body">
+                                        <h3 class="text-info fw-bold">{{ $statistics['total_users'] }}</h3>
+                                        <p class="text-muted mb-0">Total Users</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="card border-0 shadow-sm text-center">
+                                    <div class="card-body">
+                                        <h3 class="text-success fw-bold">{{ $statistics['active_users'] }}</h3>
+                                        <p class="text-muted mb-0">Active Users</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="card border-0 shadow-sm text-center">
+                                    <div class="card-body">
+                                        <h3 class="text-warning fw-bold">{{ $statistics['verified_users'] }}</h3>
+                                        <p class="text-muted mb-0">Verified Users</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="card border-0 shadow-sm text-center">
+                                    <div class="card-body">
+                                        <h3 class="text-danger fw-bold">{{ $statistics['inactive_users'] }}</h3>
+                                        <p class="text-muted mb-0">Inactive Users</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="card">
                         <span class="mask bg-primary opacity-10 border-radius-lg"></span>
@@ -106,7 +145,8 @@
                                             </li>
                                             <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
                                                     action</a></li>
-                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else
+                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                    else
                                                     here</a></li>
                                         </ul>
                                     </div>

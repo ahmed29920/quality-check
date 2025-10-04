@@ -148,7 +148,7 @@
                         <input type="text" name="meta_keywords[ar]" class="form-control">
                     </div>
 
-                    <button class="btn btn-primary mt-3" type="submit">{{__('Save')}}</button>
+                    <button class="btn btn-purple mt-3" type="submit">{{__('Save')}}</button>
                 </form>
             </div>
         </div>

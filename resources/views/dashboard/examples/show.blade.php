@@ -100,7 +100,7 @@
                                 <input type="checkbox" class="form-check-input" value="1" name="notify" id="notify">
                                 <label class="form-check-label" for="notify">Notify Customer</label>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-2">Submit Comment</button>
+                            <button type="submit" class="btn btn-purple mt-2">Submit Comment</button>
                         </form>
                     </div>
                 </div>

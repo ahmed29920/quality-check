@@ -13,7 +13,7 @@
                     <small class="text-muted">Manage categories and their MCQ questions</small>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="{{ route('admin.categories.create') }}" class="btn btn-purple">
+                    <a href="{{ route('admin.categories.create') }}" class="btn btn-purple btn-neon">
                         <i class="fas fa-plus"></i> Create Category
                     </a>
                 </div>
@@ -117,13 +117,13 @@
                                     <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-outline-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="button" class="btn btn-outline-danger" onclick="deleteCategory({{ $category->id }})">
+                                    <button type="button" class="btn btn-outline-danger" onclick="deleteCategory('{{ $category->slug }}')">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
 
                                 {{-- MCQ Questions Link --}}
-                                <a href="{{ route('admin.mcq-questions.index', ['category_id' => $category->id]) }}"
+                                <a href="{{ route('admin.mcq-questions.index', ['category_id' => $category->slug]) }}"
                                     class="btn btn-purple w-100 mt-2">
                                      Manage Questions
                                 </a>

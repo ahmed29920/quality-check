@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\CategoryRequest;
-use App\Http\Services\CategoryService;
+use App\Services\CategoryService;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -46,9 +46,8 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Category $category)
     {
-        $category = $this->categoryService->findById($id);
         return view('dashboard.categories.show', compact('category'));
     }
 

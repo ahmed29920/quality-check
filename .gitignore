@@ -22,3 +22,8 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Ignore everything in storage except app/public
+/storage/*
+!/storage/app/
+!/storage/app/public/

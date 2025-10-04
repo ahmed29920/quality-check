@@ -45,32 +45,32 @@
             <div class="card-body">
                 @if ($questions->count() > 0)
                     <div class="table-responsive">
-                        <table id="questionsTable" class="table table-striped table-bordered">
+                        <table id="questionsTable" class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Question</th>
-                                    <th>Category</th>
-                                    <th>Title</th>
-                                    <th>Options Count</th>
-                                    <th>Order</th>
-                                    <th>Score</th>
-                                    <th>Attachments</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Question</th>
+                                    <th class="text-center">Category</th>
+                                    <th class="text-center">Title</th>
+                                    <th class="text-center">Options Count</th>
+                                    <th class="text-center">Order</th>
+                                    <th class="text-center">Score</th>
+                                    <th class="text-center">Attachments</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($questions as $index => $question)
                                     <tr id="row-{{ $question->id }}">
-                                        <td>{{ $questions->firstItem() + $index }}</td>
-                                        <td>{{ $question->title }}</td>
-                                        <td>{{ $question->category->getTranslation('name', app()->getLocale()) }}</td>
-                                        <td>{{ $question->title }}</td>
-                                        <td>{{ count($question->options) }}</td>
-                                        <td>{{ $question->sort_order }}</td>
-                                        <td>{{ $question->score }} pts</td>
-                                        <td>
+                                        <td class="text-center">{{ $questions->firstItem() + $index }}</td>
+                                        <td class="text-center">{{ $question->title }}</td>
+                                        <td class="text-center">{{ $question->category->getTranslation('name', app()->getLocale()) }}</td>
+                                        <td class="text-center">{{ $question->title }}</td>
+                                        <td class="text-center">{{ count($question->options) }}</td>
+                                        <td class="text-center">{{ $question->sort_order }}</td>
+                                        <td class="text-center">{{ $question->score }} pts</td>
+                                        <td class="text-center">
                                             @if ($question->allows_attachments)
                                                 <span class="badge bg-purple">
                                                     {{ $question->requires_attachment ? 'Required' : 'Optional' }}
@@ -79,13 +79,12 @@
                                                 <span class="badge bg-secondary">None</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            <span class="badge {{ $question->is_active ? 'bg-success' : 'bg-secondary' }}"
-                                                id="status-{{ $question->id }}">
+                                        <td class="text-center"> 
+                                            <span class="badge {{ $question->is_active ? 'bg-success' : 'bg-secondary' }}" id="status-{{ $question->id }}">
                                                 {{ $question->is_active ? 'Active' : 'Inactive' }}
                                             </span>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <div class="btn-group btn-group-sm">
                                                 <a href="{{ route('admin.mcq-questions.edit', $question) }}"
                                                     class="btn btn-outline-primary edit-btn" data-id="{{ $question->id }}">

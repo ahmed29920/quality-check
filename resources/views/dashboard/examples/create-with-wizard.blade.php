@@ -295,7 +295,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Save Product</button>
+                    <button type="submit" class="btn btn-purple mt-3">Save Product</button>
                 </form>
             </div>
         </div>

@@ -9,7 +9,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Category extends Model
 {
-    use HasFactory, SoftDeletes , HasTranslations;
+    use HasFactory, SoftDeletes, HasTranslations;
 
     protected $fillable = [
         'name',
@@ -36,6 +36,11 @@ class Category extends Model
 
     public $translatable = ['name', 'description'];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -51,10 +56,10 @@ class Category extends Model
         return $this->image ? asset('storage/' . $this->image) : asset('dashboard/img/placeholder/no-image.png');
     }
 
-    // public function services()
-    // {
-    //     return $this->hasMany(Service::class);
-    // }
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
 
     /**
      * Get the MCQ questions for this category.
