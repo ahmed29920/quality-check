@@ -1,17 +1,117 @@
 @extends('dashboard.layouts.app')
 @section('title', 'Dashboard')
 @section('content')
-    <div class="row">
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-12">
+        <div class="row">
+            {{-- Statistics Cards --}}
+            <div class="row mb-4">
+                <div class="col-md">
+                    <div class="card border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <h3 class="text-info fw-bold">{{ $user_statistics['total_users'] }}</h3>
+                            <p class="text-muted mb-0">{{__('Total Users')}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <h3 class="text-success fw-bold">{{ $user_statistics['active_users'] }}</h3>
+                            <p class="text-muted mb-0">{{__('Active Users')}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <h3 class="text-warning fw-bold">{{ $user_statistics['verified_users'] }}</h3>
+                            <p class="text-muted mb-0">{{__('Verified Users')}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <h3 class="text-danger fw-bold">{{ $user_statistics['inactive_users'] }}</h3>
+                            <p class="text-muted mb-0">{{__('Inactive Users')}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <div class="card border-0 shadow-sm text-center">
+                    <div class="card-body">
+                        <h3 class="text-info fw-bold">{{ $provider_statistics['total_providers'] }}</h3>
+                        <p class="text-muted mb-0">{{__('Total Providers')}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card border-0 shadow-sm text-center">
+                    <div class="card-body">
+                        <h3 class="text-success fw-bold">{{ $provider_statistics['active_providers'] }}</h3>
+                        <p class="text-muted mb-0">{{__('Active Providers')}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card border-0 shadow-sm text-center">
+                    <div class="card-body">
+                        <h3 class="text-warning fw-bold">{{ $provider_statistics['verified_providers'] }}</h3>
+                        <p class="text-muted mb-0">{{__('Verified Providers')}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card border-0 shadow-sm text-center">
+                    <div class="card-body">
+                        <h3 class="text-danger fw-bold">{{ $provider_statistics['inactive_providers'] }}</h3>
+                        <p class="text-muted mb-0">{{__('Inactive Providers')}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md">
+                <div class="card border-0 shadow-sm text-center">
+                    <div class="card-body">
+                        <h3 class="text-info fw-bold">{{ $provider_services_statistics['total_provider_services'] }}</h3>
+                        <p class="text-muted mb-0">{{__('Total Provider Services')}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card border-0 shadow-sm text-center">
+                    <div class="card-body">
+                        <h3 class="text-success fw-bold">{{ $provider_services_statistics['active_provider_services'] }}</h3>
+                        <p class="text-muted mb-0">{{__('Active Provider Services')}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card border-0 shadow-sm text-center">
+                    <div class="card-body">
+                        <h3 class="text-warning fw-bold">{{ $provider_services_statistics['inactive_provider_services'] }}</h3>
+                        <p class="text-muted mb-0">{{__('Inactive Provider Services')}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {{-- <div class="row">
         <div class="col-lg-6 col-12">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="row">
-                        {{-- Statistics Cards --}}
                         <div class="row mb-4">
                             <div class="col-md">
                                 <div class="card border-0 shadow-sm text-center">
                                     <div class="card-body">
-                                        <h3 class="text-info fw-bold">{{ $statistics['total_users'] }}</h3>
+                                        <h3 class="text-info fw-bold">{{ $user_statistics['total_users'] }}</h3>
                                         <p class="text-muted mb-0">Total Users</p>
                                     </div>
                                 </div>
@@ -19,7 +119,7 @@
                             <div class="col-md">
                                 <div class="card border-0 shadow-sm text-center">
                                     <div class="card-body">
-                                        <h3 class="text-success fw-bold">{{ $statistics['active_users'] }}</h3>
+                                        <h3 class="text-success fw-bold">{{ $user_statistics['active_users'] }}</h3>
                                         <p class="text-muted mb-0">Active Users</p>
                                     </div>
                                 </div>
@@ -27,7 +127,7 @@
                             <div class="col-md">
                                 <div class="card border-0 shadow-sm text-center">
                                     <div class="card-body">
-                                        <h3 class="text-warning fw-bold">{{ $statistics['verified_users'] }}</h3>
+                                        <h3 class="text-warning fw-bold">{{ $user_statistics['verified_users'] }}</h3>
                                         <p class="text-muted mb-0">Verified Users</p>
                                     </div>
                                 </div>
@@ -35,7 +135,7 @@
                             <div class="col-md">
                                 <div class="card border-0 shadow-sm text-center">
                                     <div class="card-body">
-                                        <h3 class="text-danger fw-bold">{{ $statistics['inactive_users'] }}</h3>
+                                        <h3 class="text-danger fw-bold">{{ $user_statistics['inactive_users'] }}</h3>
                                         <p class="text-muted mb-0">Inactive Users</p>
                                     </div>
                                 </div>
@@ -263,8 +363,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row my-4">
+    </div> --}}
+    {{-- <div class="row my-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
@@ -649,8 +749,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-4">
+    </div> --}}
+    {{-- <div class="row mt-4">
         <div class="col-lg-7 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">
@@ -699,8 +799,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-4">
+    </div> --}}
+    {{-- <div class="row mt-4">
         <div class="col-lg-5 mb-lg-0 mb-4">
             <div class="card z-index-2">
                 <div class="card-body p-2">
@@ -872,5 +972,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

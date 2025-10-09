@@ -8,11 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens , HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -74,5 +75,9 @@ class User extends Authenticatable
     public function getImageUrlAttribute()
     {
         return $this->image ? asset('storage/' . $this->image) : asset('dashboard/img/placeholder/no-image.png');
+    }
+
+    public function provider(){
+        return $this->hasOne(Provider::class);
     }
 }

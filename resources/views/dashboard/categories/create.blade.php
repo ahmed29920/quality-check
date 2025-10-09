@@ -7,23 +7,23 @@
         {{-- Wizard Steps --}}
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-transparent">
-                <h4 class="mb-0 text-purple fw-bold">Create New Category</h4>
-                <small class="text-muted">Add category details and associated MCQ questions</small>
+                <h4 class="mb-0 text-purple fw-bold">{{__('Create New Category') }}</h4>
+                <small class="text-muted">{{__('Add category details and associated MCQ questions') }}</small>
             </div>
             <div class="card-body">
                 <nav aria-label="Progress">
                     <ol class="prog-indicator">
                         <li class="prog-indicator-item active" id="step-category">
                             <span class="prog-indicator-number">1</span>
-                            <span class="prog-indicator-text">Category Info</span>
+                            <span class="prog-indicator-text">{{__('Category Info') }}</span>
                         </li>
                         <li class="prog-indicator-item" id="step-questions">
                             <span class="prog-indicator-number">2</span>
-                            <span class="prog-indicator-text">Questions</span>
+                            <span class="prog-indicator-text">{{__('Questions') }}</span>
                         </li>
                         <li class="prog-indicator-item" id="step-review">
                             <span class="prog-indicator-number">3</span>
-                            <span class="prog-indicator-text">Review</span>
+                            <span class="prog-indicator-text">{{__('Review') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -40,13 +40,13 @@
                     {{-- Step 1: Category Information --}}
                     <div id="category-step" class="wizard-step">
                         <h5 class="fw-bold mb-4 text-purple">
-                            <i class="fas fa-info-circle"></i> Category Information
+                            <i class="fas fa-info-circle"></i> {{__('Category Information') }}
                         </h5>
 
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Category Name (EN)<span
+                                    <label class="form-label fw-bold">{{__('Category Name (EN)') }}<span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="name[en]" class="form-control" value="{{ old('name[en]') }}"
                                         required>
@@ -55,7 +55,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Category Name (AR)<span
+                                    <label class="form-label fw-bold">{{__('Category Name (AR)') }}<span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="name[ar]" class="form-control" value="{{ old('name') }}"
                                         required>
@@ -68,12 +68,12 @@
                                 {{-- Pricing Fields (Hidden by default) --}}
                                 <div id="pricing-fields" class="row" style="display: none;">
                                     <div class="col-md-6">
-                                        <label class="form-label">Monthly Price ($)</label>
+                                        <label class="form-label">{{__('Monthly Price') }} ($)</label>
                                         <input type="number" name="monthly_subscription_price" class="form-control"
                                             value="{{ old('monthly_subscription_price') }}" min="0" step="0.01">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Weekly Price ($)</label>
+                                        <label class="form-label">{{__('Weekly Price') }} ($)</label>
                                         <input type="number" name="yearly_subscription_price" class="form-control"
                                             value="{{ old('yearly_subscription_price') }}" min="0" step="0.01">
                                     </div>
@@ -81,18 +81,15 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label class="form-label fw-bold">Category Image</label>
-                                <div class="upload-area border-dashed border-2 p-4 text-center position-relative"
-                                    onclick="document.getElementById('imageInput').click()">
+                                <label class="form-label fw-bold">{{__('Category Image')}}</label>
+                                <div class="upload-area border-dashed border-2 p-4 text-center position-relative" onclick="document.getElementById('imageInput').click()">
 
-                                    <!-- محتوى الديف (بيختفي بعد الرفع) -->
                                     <div id="uploadPlaceholder">
                                         <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
-                                        <p class="text-muted">Click to upload image</p>
+                                        <p class="text-muted">{{__('Click to upload image') }}</p>
                                         <small class="text-muted">Max 2MB (JPEG, PNG, JPG, GIF)</small>
                                     </div>
 
-                                    <!-- الصورة -->
                                     <img id="imagePreview" src="" alt="Preview"
                                         class="img-fluid rounded d-none w-100 h-100"
                                         style="object-fit: contain; max-height: 200px;">
@@ -108,14 +105,14 @@
                             <div class="col-md-12">
 
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Description (EN)</label>
+                                    <label class="form-label fw-bold">{{__('Description (EN)') }}</label>
                                     <textarea name="description[en]" class="form-control" rows="4" placeholder="Describe this category...">{{ old('description') }}</textarea>
                                     @error('description')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Description (AR)</label>
+                                    <label class="form-label fw-bold">{{__('Description (AR)') }}</label>
                                     <textarea name="description[ar]" class="form-control" rows="4" placeholder="Describe this category...">{{ old('description') }}</textarea>
                                     @error('description')
                                         <small class="text-danger">{{ $message }}</small>
@@ -129,7 +126,7 @@
                                                 class="form-check-input" value="1"
                                                 @if (old('is_active', true)) checked @endif>
                                             <label class="form-check-label fw-bold" for="is_active">
-                                                Category is Active
+                                                {{__('Category is Active') }}
                                             </label>
                                         </div>
                                     </div>
@@ -139,14 +136,14 @@
                                                 id="has_pricable_services" checked class="form-check-input" value="1"
                                                 @if (old('has_pricable_services')) checked @endif>
                                             <label class="form-check-label fw-bold" for="has_pricable_services">
-                                                Has Paid Services
+                                                {{__('Has Paid Services') }}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form- mb-3">
                                             <label class="form-control-label fw-bold" for="monthly_subscription_price">
-                                                Monthly Subscription Price
+                                                {{__('Monthly Subscription Price') }}
                                             </label>
                                             <input type="number" name="monthly_subscription_price"
                                                 id="monthly_subscription_price"  class="form-control" value="{{ old('monthly_subscription_price') }}">
@@ -158,7 +155,7 @@
                                     <div class="col-md-6">
                                         <div class="form- mb-3">
                                             <label class="form-control-label fw-bold" for="yearly_subscription_price">
-                                                Yearly Subscription Price
+                                                {{__('Yearly Subscription Price') }}
                                             </label>
                                             <input type="number" name="yearly_subscription_price" id="yearly_subscription_price"  class="form-control" value="{{ old('yearly_subscription_price') }}">
                                                 @error('yearly_subscription_price')
@@ -172,7 +169,7 @@
 
                         <div class="text-end mt-4">
                             <button type="button" class="btn btn-purple" onclick="nextStep()">
-                                Next: Questions <i class="fas fa-arrow-right"></i>
+                                {{__('Next: Questions') }} <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
                     </div>
@@ -180,30 +177,30 @@
                     {{-- Step 2: Questions --}}
                     <div id="questions-step" class="wizard-step" style="display: none;">
                         <h5 class="fw-bold mb-4 text-purple">
-                            <i class="fas fa-question-circle"></i> MCQ Questions
+                            <i class="fas fa-question-circle"></i> {{__('MCQ Questions') }}
                         </h5>
 
                         <div id="questionsContainer">
                             {{-- No questions by default --}}
                             <div class="text-center py-4" id="noQuestionsText">
                                 <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
-                                <h6 class="text-muted">No questions added yet</h6>
-                                <p class="text-muted">Click "Add Question" to start building your question set.</p>
+                                <h6 class="text-muted">{{__('No questions added yet')}}</h6>
+                                <p class="text-muted">{{__("Click 'Add Question' to start building your question set.")}}</p>
                             </div>
                         </div>
 
                         <div class="mt-4">
                             <button type="button" class="btn btn-outline-info" onclick="addQuestion()">
-                                <i class="fas fa-plus"></i> Add Question
+                                <i class="fas fa-plus"></i> {{__('Add Question') }}
                             </button>
                         </div>
 
                         <div class="d-flex justify-content-between mt-4">
                             <button type="button" class="btn btn-outline-secondary" onclick="previousStep()">
-                                <i class="fas fa-arrow-left"></i> Previous
+                                <i class="fas fa-arrow-left"></i> {{__('Previous') }}
                             </button>
                             <button type="button" class="btn btn-purple" onclick="nextStep()">
-                                Next: Review <i class="fas fa-arrow-right"></i>
+                                {{__('Next: Review') }} <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
                     </div>
@@ -211,7 +208,7 @@
                     {{-- Step 3: Review --}}
                     <div id="review-step" class="wizard-step" style="display: none;">
                         <h5 class="fw-bold mb-4 text-purple">
-                            <i class="fas fa-check-circle"></i> Review & Submit
+                            <i class="fas fa-check-circle"></i> {{__('Review & Submit') }}
                         </h5>
 
                         <div id="reviewContent">
@@ -220,10 +217,10 @@
 
                         <div class="d-flex justify-content-between mt-4">
                             <button type="button" class="btn btn-outline-secondary" onclick="previousStep()">
-                                <i class="fas fa-arrow-left"></i> Previous
+                                <i class="fas fa-arrow-left"></i> {{__('Previous') }}
                             </button>
                             <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save"></i> Create Category
+                                <i class="fas fa-save"></i> {{__('Create Category') }}
                             </button>
                         </div>
                     </div>
@@ -236,7 +233,7 @@
     <template id="questionTemplate">
         <div class="question-item border rounded p-4 mb-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="mb-0 text-purple fw-bold">Question <span class="question-number"></span></h6>
+                <h6 class="mb-0 text-purple fw-bold">{{__('Question') }} <span class="question-number"></span></h6>
                 <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeQuestion(this)">
                     <i class="fas fa-times"></i>
                 </button>
@@ -245,19 +242,19 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="mb-3">
-                        <label class="form-label">Question Title <span class="text-danger">*</span></label>
+                        <label class="form-label">{{__('Question Title') }} <span class="text-danger">*</span></label>
                         <textarea class="form-control question-title" rows="2" name="questions[INDEX][title]" required></textarea>
                     </div>
 
                     <div class="options-container mb-3">
-                        <label class="form-label">Answer Options <span class="text-danger">*</span></label>
+                        <label class="form-label">{{__('Answer Options') }} <span class="text-danger">*</span></label>
                         <div class="options-list">
                             <div class="input-group mb-2">
                                 <span class="input-group-text">
                                     <span class="badge bg-info rounded-circle">A</span>
                                 </span>
                                 <input type="text" class="form-control" name="questions[INDEX][options][]" required>
-                                <button type="button" class="btn btn-outline-danger btn-sm"
+                                <button type="button" class="btn btn-outline-danger btn-sm mb-0"
                                     onclick="removeOption(this)">
                                     <i class="fas fa-times"></i>
                                 </button>
@@ -267,7 +264,7 @@
                                     <span class="badge bg-info rounded-circle">B</span>
                                 </span>
                                 <input type="text" class="form-control" name="questions[INDEX][options][]" required>
-                                <button type="button" class="btn btn-outline-danger btn-sm"
+                                <button type="button" class="btn btn-outline-danger btn-sm mb-0"
                                     onclick="removeOption(this)">
                                     <i class="fas fa-times"></i>
                                 </button>
@@ -280,12 +277,12 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label class="form-label">Score <span class="text-danger">*</span></label>
+                            <label class="form-label">{{__('Score') }} <span class="text-danger">*</span></label>
                             <input type="number" class="form-control question-score" name="questions[INDEX][score]"
                                 min="1" max="100" value="10" required>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Sort Order</label>
+                            <label class="form-label">{{__('Sort Order') }}</label>
                             <input type="number" class="form-control question-order" name="questions[INDEX][sort_order]"
                                 required>
                         </div>
@@ -297,7 +294,7 @@
                         <input type="checkbox" class="form-check-input" id="allowsAttachments"
                             name="questions[INDEX][allows_attachments]" value="1">
                         <label class="form-check-label" for="allowsAttachments">
-                            Allow Attachments
+                            {{__('Allow Attachments') }}
                         </label>
                     </div>
 
@@ -305,7 +302,7 @@
                         <input type="checkbox" class="form-check-input" id="requiresAttachment"
                             name="questions[INDEX][requires_attachment]" value="1">
                         <label class="form-check-label" for="requiresAttachment">
-                            Require Attachment
+                            {{__('Require Attachment') }}
                         </label>
                     </div>
 
@@ -313,7 +310,7 @@
                         <input type="checkbox" class="form-check-input" id="isActive"
                             name="questions[INDEX][is_active]" value="1" checked>
                         <label class="form-check-label" for="isActive">
-                            Question Active
+                            {{__('Question Active') }}
                         </label>
                     </div>
                 </div>
@@ -490,7 +487,7 @@
             }
             return true;
         }
-        
+
         document.getElementById('imageInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {

@@ -4,19 +4,20 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 use App\Models\User;
+use App\Repositories\ProviderRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-
 class AuthService
 {
     protected $userRepository;
-
-    public function __construct(UserRepository $userRepository)
+    protected $providerRepository;
+    public function __construct(UserRepository $userRepository, ProviderRepository $providerRepository)
     {
         $this->userRepository = $userRepository;
+        $this->providerRepository = $providerRepository;
     }
 
     /**
@@ -24,34 +25,40 @@ class AuthService
      */
     public function register(array $data): array
     {
-        // Check if user already exists
         $existingUser = $this->userRepository->findByPhone($data['phone']);
         if ($existingUser) {
             throw new \Exception('User with this phone number already exists');
         }
 
-        // Create user
         $userData = [
             'name' => $data['name'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role'] ?? 'user',
             'is_active' => true,
         ];
 
-        // Add email if provided
         if (isset($data['email']) && !empty($data['email'])) {
             $userData['email'] = $data['email'];
         }
 
         $user = $this->userRepository->create($userData);
 
-        // Create phone verification code
         $verificationCode = $this->generateVerificationCode();
         $this->userRepository->createPhoneVerificationCode($user, $verificationCode);
 
+        if ($data['role'] == 'provider') {
+            $providerData = [
+                'user_id' => $user->id,
+                'name' => $data['name'],
+                'slug' => Str::slug($data['name']),
+            ];
+            $this->providerRepository->create($providerData);
+        }
+
         return [
             'user' => $user,
-            'verification_code' => $verificationCode // Only for testing, remove in production
+            'verification_code' => $verificationCode // Only for testing
         ];
     }
 
@@ -61,7 +68,7 @@ class AuthService
     public function login(string $phone, string $password): array
     {
         $user = $this->userRepository->findByPhone($phone);
-        
+
         if (!$user || !Hash::check($password, $user->password)) {
             throw new \Exception('Invalid credentials');
         }
@@ -70,7 +77,6 @@ class AuthService
             throw new \Exception('Account is deactivated');
         }
 
-        // Create token
         $token = $user->createToken('auth-token')->plainTextToken;
 
         return [
@@ -85,7 +91,7 @@ class AuthService
     public function verifyPhone(string $phone, string $code): array
     {
         $user = $this->userRepository->findByPhone($phone);
-        
+
         if (!$user) {
             throw new \Exception('User not found');
         }
@@ -98,7 +104,6 @@ class AuthService
             throw new \Exception('Invalid or expired verification code');
         }
 
-        // Update phone verification status
         $this->userRepository->updatePhoneVerification($user, true);
         $this->userRepository->deletePhoneVerificationCode($phone);
 
@@ -111,7 +116,7 @@ class AuthService
     public function resendPhoneVerificationCode(string $phone): array
     {
         $user = $this->userRepository->findByPhone($phone);
-        
+
         if (!$user) {
             throw new \Exception('User not found');
         }
@@ -134,7 +139,6 @@ class AuthService
      */
     public function logout(User $user): bool
     {
-        // Delete current access token
         $user->currentAccessToken()->delete();
         return true;
     }
@@ -157,7 +161,7 @@ class AuthService
     public function sendPasswordResetEmail(string $email): array
     {
         $user = $this->userRepository->findByEmail($email);
-        
+
         if (!$user) {
             throw new \Exception('User with this email not found');
         }
@@ -165,7 +169,6 @@ class AuthService
         $resetCode = $this->generateVerificationCode();
         $this->userRepository->createPasswordResetToken($user, $resetCode);
 
-        // Send email with reset code
         Mail::send('emails.password-reset', [
             'user' => $user,
             'resetCode' => $resetCode
@@ -220,7 +223,6 @@ class AuthService
             throw new \Exception('No valid fields to update');
         }
 
-        // If phone is being changed, mark it as unverified
         if (isset($updateData['phone']) && $updateData['phone'] !== $user->phone) {
             $updateData['phone_verified_at'] = null;
         }

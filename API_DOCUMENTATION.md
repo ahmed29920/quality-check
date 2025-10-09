@@ -225,6 +225,153 @@ GET /services/{id}
 }
 ```
 
+## Questions API
+
+### Get Questions by Category
+```
+GET /questions/category/{id}
+```
+
+**Query Parameters:**
+- `limit` (optional): Number of questions to retrieve (default: 15)
+
+**Response:**
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "category_id": 1,
+            "title": "What is your experience with this service?",
+            "options": [
+                "Less than 1 year",
+                "1-3 years", 
+                "3-5 years",
+                "More than 5 years"
+            ],
+            "formatted_options": [
+                {
+                    "value": "A",
+                    "text": "Less than 1 year",
+                    "index": 0
+                },
+                {
+                    "value": "B", 
+                    "text": "1-3 years",
+                    "index": 1
+                }
+            ],
+            "allows_attachments": true,
+            "requires_attachment": false,
+            "score": 10,
+            "is_active": true,
+            "sort_order": 1,
+            "created_at": "2023-01-01T00:00:00.000000Z",
+            "updated_at": "2023-01-01T00:00:00.000000Z"
+        }
+    ]
+}
+```
+
+## Provider Answers API
+
+### Get My Answers
+```
+GET /my-answers
+```
+
+**Query Parameters:**
+- `per_page` (optional): Number of items per page (default: 15)
+
+**Response:**
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "provider_id": 1,
+            "question_id": 5,
+            "answer": "This is my answer to the question",
+            "attachment": "provider_answers/provider_1_question_5_1234567890.pdf",
+            "attachment_url": "http://your-domain.com/storage/provider_answers/provider_1_question_5_1234567890.pdf",
+            "score": 10,
+            "is_correct": true,
+            "is_evaluated": true,
+            "submitted_at": "2023-01-01 10:30:00",
+            "evaluated_at": "2023-01-01 11:00:00",
+            "created_at": "2023-01-01 10:30:00",
+            "updated_at": "2023-01-01 11:00:00",
+            "provider": {
+                "id": 1,
+                "name": "Provider Name",
+                "slug": "provider-slug"
+            },
+            "question": {
+                "id": 5,
+                "title": "Question Title",
+                "score": 10,
+                "allows_attachments": true,
+                "requires_attachment": false
+            }
+        }
+    ],
+    "meta": {
+        "current_page": 1,
+        "last_page": 3,
+        "per_page": 15,
+        "total": 25
+    }
+}
+```
+
+### Submit Provider Answer
+```
+POST /provider-answers
+```
+
+**Request Body (multipart/form-data):**
+- `question_id` (required): Question ID
+- `answer` (required): Answer text (max 5000 characters)
+- `attachment` (optional): File attachment (pdf, doc, docx, jpg, jpeg, png, max 10MB)
+
+**Note:** The `provider_id` is automatically determined from the authenticated user's provider account.
+
+**Response:**
+```json
+{
+    "success": true,
+    "message": "Answer submitted successfully.",
+    "data": {
+        "id": 1,
+        "provider_id": 1,
+        "question_id": 5,
+        "answer": "This is my answer to the question",
+        "attachment": "provider_answers/provider_1_question_5_1234567890.pdf",
+        "attachment_url": "http://your-domain.com/storage/provider_answers/provider_1_question_5_1234567890.pdf",
+        "score": null,
+        "is_correct": false,
+        "is_evaluated": false,
+        "submitted_at": "2023-01-01 10:30:00",
+        "evaluated_at": null,
+        "created_at": "2023-01-01 10:30:00",
+        "updated_at": "2023-01-01 10:30:00",
+        "provider": {
+            "id": 1,
+            "name": "Provider Name",
+            "slug": "provider-slug"
+        },
+        "question": {
+            "id": 5,
+            "title": "Question Title",
+            "score": 10,
+            "allows_attachments": true,
+            "requires_attachment": false
+        }
+    }
+}
+```
+
 ## Error Response Format
 ```json
 {
@@ -236,22 +383,47 @@ GET /services/{id}
 
 ## HTTP Status Codes
 - `200`: Success
+- `201`: Created
+- `400`: Bad Request
 - `404`: Resource not found
 - `500`: Internal server error
 
 ## Examples
 
-### Get all active services in a specific category
-```
-GET /api/v1/services?category_id=1&is_active=true
-```
-
-### Get services with price range
-```
-GET /api/v1/services?min_price=50&max_price=200
+### Get questions for a category
+```bash
+curl -X GET http://your-domain.com/api/questions/category/1 \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Accept: application/json"
 ```
 
-### Get services with custom pagination
+### Get my answers
+```bash
+curl -X GET http://your-domain.com/api/my-answers \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Accept: application/json"
 ```
-GET /api/v1/services?per_page=20&page=2
+
+### Get my answers with pagination
+```bash
+curl -X GET http://your-domain.com/api/my-answers?per_page=20 \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Accept: application/json"
+```
+
+### Submit answer with attachment
+```bash
+curl -X POST http://your-domain.com/api/provider-answers \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "question_id=5" \
+  -F "answer=This is my detailed answer" \
+  -F "attachment=@/path/to/file.pdf"
+```
+
+### Submit answer without attachment
+```bash
+curl -X POST http://your-domain.com/api/provider-answers \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "question_id=5" \
+  -F "answer=This is my detailed answer"
 ```

@@ -47,6 +47,30 @@ class McqQuestion extends Model
     }
 
     /**
+     * Get all answers for this question.
+     */
+    public function answers()
+    {
+        return $this->hasMany(ProviderAnswer::class, 'question_id');
+    }
+
+    /**
+     * Get evaluated answers for this question.
+     */
+    public function evaluatedAnswers()
+    {
+        return $this->hasMany(ProviderAnswer::class, 'question_id')->evaluated();
+    }
+
+    /**
+     * Get pending evaluation answers for this question.
+     */
+    public function pendingAnswers()
+    {
+        return $this->hasMany(ProviderAnswer::class, 'question_id')->pendingEvaluation();
+    }
+
+    /**
      * Scope a query to only include active questions.
      */
     public function scopeActive($query)

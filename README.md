@@ -19,6 +19,9 @@ A comprehensive Laravel-based quality management system with authentication, cat
 - **Dashboard**: Admin panel for managing quality checks
 - **Category Management**: CRUD operations for quality check categories
 - **MCQ Questions**: Multiple choice questions for each category with attachments support
+- **Provider Management**: Service provider registration and management system
+- **Provider Answers**: System for providers to answer MCQ questions with optional attachments
+- **Answer Evaluation**: Evaluation system for provider answers with scoring and feedback
 - **Responsive Design**: Modern UI with dashboard theme
 
 ## Authentication System
@@ -74,6 +77,104 @@ For development, you can use `MAIL_MAILER=log` to see emails in `storage/logs/la
 - `POST /admin/profile` - Update profile information
 - `POST /admin/profile/password` - Update user password
 - `POST /admin/logout` - User logout
+
+## Provider Answer System
+
+### Overview
+The Provider Answer system allows service providers to answer MCQ questions and submit their responses with optional attachments. The system includes evaluation capabilities for administrators to score and provide feedback on submitted answers.
+
+### Database Structure
+The `provider_answers` table contains:
+- `provider_id`: Foreign key to the providers table
+- `question_id`: Foreign key to the mcq_questions table
+- `answer`: Text answer provided by the provider
+- `attachment`: Optional file attachment path
+- `score`: Score given by evaluator (nullable)
+- `feedback`: Feedback from evaluator (nullable)
+- `is_evaluated`: Boolean flag indicating if answer has been evaluated
+- `submitted_at`: Timestamp when answer was submitted
+- `evaluated_at`: Timestamp when answer was evaluated
+
+### Key Features
+
+#### Answer Submission
+- Providers can submit answers to MCQ questions
+- Support for text answers and optional file attachments
+- Validation based on question requirements (attachment required/allowed)
+- Unique constraint ensures one answer per provider per question
+
+#### Answer Evaluation
+- Administrators can evaluate submitted answers
+- Scoring system with feedback capability
+- Automatic timestamp tracking for evaluation
+- Percentage score calculation based on question total score
+
+#### File Management
+- Secure file upload and storage for attachments
+- File download functionality for evaluators
+- Automatic file cleanup when answers are deleted
+
+### Model Relationships
+
+#### ProviderAnswer Model
+- `belongsTo(Provider::class)`: Links to the provider who submitted the answer
+- `belongsTo(McqQuestion::class)`: Links to the question being answered
+
+#### Provider Model
+- `hasMany(ProviderAnswer::class)`: All answers submitted by this provider
+- `evaluatedAnswers()`: Only evaluated answers
+- `pendingAnswers()`: Only pending evaluation answers
+
+#### McqQuestion Model
+- `hasMany(ProviderAnswer::class)`: All answers for this question
+- `evaluatedAnswers()`: Only evaluated answers
+- `pendingAnswers()`: Only pending evaluation answers
+
+### Service Layer
+
+#### ProviderAnswerService
+The service layer provides business logic for:
+- Answer submission with validation
+- Answer updates (only for non-evaluated answers)
+- Answer evaluation with scoring
+- File attachment management
+- Statistics generation for providers and questions
+
+#### ProviderAnswerRepository
+The repository layer handles data access:
+- CRUD operations for provider answers
+- Filtering by provider, question, and evaluation status
+- Pagination support
+- Statistics queries
+
+### Usage Examples
+
+#### Submit an Answer
+```php
+$service = new ProviderAnswerService(new ProviderAnswerRepository());
+
+$answer = $service->submitAnswer([
+    'provider_id' => 1,
+    'question_id' => 5,
+    'answer' => 'This is my answer to the question'
+], $attachmentFile);
+```
+
+#### Evaluate an Answer
+```php
+$service->evaluateAnswer($answer, 8.5, 'Good answer, but could be more detailed.');
+```
+
+#### Get Provider Statistics
+```php
+$stats = $service->getProviderStats(1);
+// Returns: total_answers, evaluated_answers, pending_answers, average_score
+```
+
+### File Storage
+- Attachments are stored in `storage/app/public/provider_answers/`
+- Files are named with pattern: `provider_{id}_question_{id}_{timestamp}.{extension}`
+- Access via `asset('storage/' . $path)` for public access
 
 ## About Laravel
 

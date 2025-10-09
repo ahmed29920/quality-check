@@ -16,14 +16,8 @@ class CategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => [
-                'en' => $this->getTranslation('name', 'en'),
-                'ar' => $this->getTranslation('name', 'ar'),
-            ],
-            'description' => [
-                'en' => $this->getTranslation('description', 'en'),
-                'ar' => $this->getTranslation('description', 'ar'),
-            ],
+            'name' => $this->name,
+            'description' => $this->description,
             'slug' => $this->slug,
             'image_url' => $this->image_url,
             'is_active' => $this->is_active,
@@ -32,7 +26,7 @@ class CategoryResource extends JsonResource
             'yearly_subscription_price' => $this->yearly_subscription_price,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            
+
             // Include relationships when loaded
             'questions_count' => $this->whenLoaded('questions', function () {
                 return $this->questions->count();
@@ -40,7 +34,7 @@ class CategoryResource extends JsonResource
             'services_count' => $this->whenLoaded('services', function () {
                 return $this->services->count();
             }),
-            
+
             'services' => ServiceResource::collection($this->whenLoaded('services')),
         ];
     }

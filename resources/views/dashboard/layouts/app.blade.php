@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('dashboard/img/icon.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('dashboard/img/icon.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('storage/' . setting('app_icon')) }}">
+    <link rel="icon" type="image/png" href="{{ asset('storage/' . setting('app_icon')) }}">
     <title>
-        {{ Config::get('app.name') }}
+        {{ setting('app_name') }}
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800" rel="stylesheet" />
@@ -282,7 +282,7 @@
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
         });
     </script>
-    
+
     <script>
         console.log(document.querySelectorAll('.ps'));
         document.querySelectorAll('.ps').forEach(el => {

@@ -4,15 +4,25 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Models\McqQuestion;
+use App\Repositories\CategoryRepository;
 use App\Repositories\McqQuestionRepository;
 
 class McqQuestionService
 {
     protected $repository;
-
-    public function __construct(McqQuestionRepository $repository)
+    protected $categoryRepository;
+    public function __construct(McqQuestionRepository $repository, CategoryRepository $categoryRepository)
     {
         $this->repository = $repository;
+        $this->categoryRepository = $categoryRepository;
+    }
+    public function indexByCategory($id, $limit)
+    {
+        $category = $this->categoryRepository->findById($id);
+        if (!$category) {
+            throw new \Exception('Category not found');
+        }
+        return $this->repository->getByCategoryId($id, $limit);
     }
 
     public function listQuestions($categoryId = null, $perPage = 20)

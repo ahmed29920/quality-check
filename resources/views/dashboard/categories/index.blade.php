@@ -9,12 +9,12 @@
         <div class="card-body">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h4 class="mb-0 text-purple fw-bold">Categories</h4>
-                    <small class="text-muted">Manage categories and their MCQ questions</small>
+                    <h4 class="mb-0 text-purple fw-bold">{{__('Categories')}}</h4>
+                    <small class="text-muted">{{__('Manage categories and their MCQ questions')}}</small>
                 </div>
                 <div class="col-md-6 text-end">
                     <a href="{{ route('admin.categories.create') }}" class="btn btn-purple btn-neon">
-                        <i class="fas fa-plus"></i> Create Category
+                        <i class="fas fa-plus"></i> {{__('Create Category')}}
                     </a>
                 </div>
             </div>
@@ -35,12 +35,12 @@
                                     class="card-img-top" style="height: 200px; object-fit: cover;">
                                 <div class="position-absolute top-0 start-0 m-2">
                                     @if($category->is_active)
-                                        <span class="badge bg-success">Active</span>
+                                        <span class="badge bg-success">{{__('Active')}}</span>
                                     @else
-                                        <span class="badge bg-secondary">Inactive</span>
+                                        <span class="badge bg-secondary">{{__('Inactive')}}</span>
                                     @endif
                                     @if(!$category->has_pricable_services)
-                                        <span class="badge bg-warning">Paid</span>
+                                        <span class="badge bg-warning">{{__('Paid')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -50,12 +50,12 @@
                                 <i class="fas fa-folder fa-3x text-muted"></i>
                                 <div class="position-absolute top-0 start-0 m-2">
                                     @if($category->is_active)
-                                        <span class="badge bg-success">Active</span>
+                                        <span class="badge bg-success">{{__('Active')}}</span>
                                     @else
-                                        <span class="badge bg-secondary">Inactive</span>
+                                        <span class="badge bg-secondary">{{__('Inactive')}}</span>
                                     @endif
                                     @if($category->has_pricable_services)
-                                        <span class="badge bg-warning">Paid</span>
+                                        <span class="badge bg-warning">{{__('Paid')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -77,13 +77,13 @@
                                     @if($category->monthly_subscription_price)
                                         <small class="text-purple fw-bold">
                                             <i class="fas fa-calendar-alt"></i>
-                                            Price Per Month: ${{ $category->monthly_subscription_price }}
+                                            {{__('Price Per Month')}}: ${{ $category->monthly_subscription_price }}
                                         </small><br>
                                     @endif
                                     @if($category->yearly_subscription_price)
                                         <small class="text-purple fw-bold">
                                             <i class="fas fa-calendar-alt"></i>
-                                            Price Per Year: ${{ $category->yearly_subscription_price }}
+                                            {{__('Price Per Year')}}: ${{ $category->yearly_subscription_price }}
                                         </small>
                                     @endif
                                 </div>
@@ -93,17 +93,17 @@
                             <div class="row text-center mb-3">
                                 <div class="col-4">
                                     <div class="fw-bold text-purple">{{ $category->questions_count ?? 0 }}</div>
-                                    <small class="text-muted">Questions</small>
+                                    <small class="text-muted">{{__('Questions')}}</small>
                                 </div>
                                 <div class="col-4">
                                     <div class="fw-bold text-success">{{ $category->total_score ?? 0 }}</div>
-                                    <small class="text-muted">Points</small>
+                                    <small class="text-muted">{{__('Points')}}</small>
                                 </div>
                                 <div class="col-4">
                                     <div class="fw-bold text-warning">
                                         {{ $category->created_at->diffForHumans() }}
                                     </div>
-                                    <small class="text-muted">Created</small>
+                                    <small class="text-muted">{{__('Created')}}</small>
                                 </div>
                             </div>
 
@@ -123,9 +123,9 @@
                                 </div>
 
                                 {{-- MCQ Questions Link --}}
-                                <a href="{{ route('admin.mcq-questions.index', ['category_id' => $category->slug]) }}"
+                                <a href="{{ route('admin.mcq-questions.index', ['category_id' => $category->id]) }}"
                                     class="btn btn-purple w-100 mt-2">
-                                     Manage Questions
+                                    {{__('Manage Questions')}}
                                 </a>
                             </div>
                         </div>
@@ -144,10 +144,10 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body py-5">
                     <i class="fas fa-folder-plus fa-4x text-muted mb-4"></i>
-                    <h3 class="text-muted mb-3">No Categories Yet</h3>
-                    <p class="text-muted mb-4">Create your first quality check category to get started.</p>
+                    <h3 class="text-muted mb-3">{{__('No Categories Yet') }}</h3>
+                    <p class="text-muted mb-4">{{__('Create your first quality check category to get started.') }}</p>
                     <a href="{{ route('admin.categories.create') }}" class="btn btn-purple btn-lg">
-                        <i class="fas fa-plus"></i> Create First Category
+                        <i class="fas fa-plus"></i> {{__('Create First Category') }}
                     </a>
                 </div>
             </div>

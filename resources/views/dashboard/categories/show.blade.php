@@ -10,9 +10,9 @@
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-header bg-transparent">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0 text-info fw-bold">Category Information</h5>
+                            <h5 class="mb-0 text-info fw-bold">{{__('Category Information') }}</h5>
                             <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-edit"></i> Edit
+                                <i class="fas fa-edit"></i> {{__('Edit') }}
                             </a>
                         </div>
                     </div>
@@ -42,31 +42,31 @@
                         {{-- Status Badges --}}
                         <div class="mb-3">
                             @if ($category->is_active)
-                                <span class="badge bg-success me-2">Active</span>
+                                <span class="badge bg-success me-2">{{__('Active') }}</span>
                             @else
-                                <span class="badge bg-secondary me-2">Inactive</span>
+                                <span class="badge bg-secondary me-2">{{__('Inactive') }}</span>
                             @endif
 
                             @if (!$category->has_pricable_services)
-                                <span class="badge bg-warning">Paid Category</span>
+                                <span class="badge bg-warning">{{__('Paid Category') }}</span>
                             @endif
                         </div>
 
                         {{-- Pricing Info --}}
-                        @if ($category->has_pricable_services)
+                        @if (!$category->has_pricable_services)
                             <div class="border-top pt-3">
-                                <h6 class="fw-bold text-success">Pricing</h6>
+                                <h6 class="fw-bold text-success">{{__('Pricing') }}</h6>
                                 @if ($category->monthly_subscription_price)
                                     <p class="mb-1">
                                         <i class="fas fa-calendar-alt"></i>
-                                        Monthly:
+                                        {{__('Monthly') }}:
                                         <strong>${{ number_format($category->monthly_subscription_price, 2) }}</strong>
                                     </p>
                                 @endif
                                 @if ($category->yearly_subscription_price)
                                     <p class="mb-0">
-                                        <i class="fas fa-calendar-year"></i>
-                                        Yearly:
+                                        <i class="fas fa-calendar-alt"></i>
+                                        {{__('Yearly') }}:
                                         <strong>${{ number_format($category->yearly_subscription_price, 2) }}</strong>
                                     </p>
                                 @endif
@@ -76,9 +76,9 @@
                         {{-- Meta Info --}}
                         <div class="border-top pt-3 mt-3">
                             <small class="text-muted">
-                                <i class="fas fa-calendar-plus"></i> Created:
+                                <i class="fas fa-calendar-plus"></i> {{__('Created') }}:
                                 {{ $category->created_at->format('M d, Y') }}<br>
-                                <i class="fas fa-clock"></i> Updated: {{ $category->updated_at->format('M d, Y') }}
+                                <i class="fas fa-clock"></i> {{__('Updated') }}: {{ $category->updated_at->format('M d, Y') }}
                             </small>
                         </div>
                     </div>
@@ -87,22 +87,22 @@
                 {{-- Quick Actions --}}
                 <div class="card border-0 shadow-sm">
                     <div class="card-header bg-transparent">
-                        <h6 class="mb-0 text-info fw-bold">Quick Actions</h6>
+                        <h6 class="mb-0 text-info fw-bold">{{__('Quick Actions') }}</h6>
                     </div>
                     <div class="card-body">
                         <div class="d-grid gap-2">
                             <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-outline-primary">
-                                <i class="fas fa-edit"></i> Edit Category
+                                <i class="fas fa-edit"></i> {{__('Edit Category') }}
                             </a>
 
                             <a href="{{ route('admin.mcq-questions.index', ['category_id' => $category->id]) }}"
                                 class="btn btn-outline-info">
-                                <i class="fas fa-question-circle"></i> Manage Questions
+                                <i class="fas fa-question-circle"></i> {{__('Manage Questions') }}
                             </a>
 
                             <a href="{{ route('admin.mcq-questions.create', ['category_id' => $category->id]) }}"
                                 class="btn btn-outline-success">
-                                <i class="fas fa-plus"></i> Add Question
+                                <i class="fas fa-plus"></i> {{__('Add Question') }}
                             </a>
 
                             <form action="{{ route('admin.categories.destroy', $category) }}" method="POST"
@@ -110,7 +110,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-outline-danger w-100">
-                                    <i class="fas fa-trash"></i> Delete Category
+                                    <i class="fas fa-trash"></i>{{__('Delete Category') }}
                                 </button>
                             </form>
                         </div>
@@ -125,7 +125,7 @@
                         <div class="card border-0 shadow-sm text-center">
                             <div class="card-body">
                                 <h3 class="text-info fw-bold">{{ $category->questions_count ?? 0 }}</h3>
-                                <p class="text-muted mb-0">Total Questions</p>
+                                <p class="text-muted mb-0">{{__('Total Questions') }}</p>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                         <div class="card border-0 shadow-sm text-center">
                             <div class="card-body">
                                 <h3 class="text-success fw-bold">{{ $category->total_score ?? 0 }}</h3>
-                                <p class="text-muted mb-0">Total Points</p>
+                                <p class="text-muted mb-0">{{__('Total Points') }}</p>
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                             <div class="card-body">
                                 <h3 class="text-warning fw-bold">
                                     {{ $category->questions()->where('is_active', true)->count() }}</h3>
-                                <p class="text-muted mb-0">Active Questions</p>
+                                <p class="text-muted mb-0">{{__('Active Questions') }}</p>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                             <div class="card-body">
                                 <h3 class="text-primary fw-bold">
                                     {{ $category->questions()->where('allows_attachments', true)->count() }}</h3>
-                                <p class="text-muted mb-0">With Attachments</p>
+                                <p class="text-muted mb-0">{{__('With Attachments') }}</p>
                             </div>
                         </div>
                     </div>
@@ -161,10 +161,10 @@
                 <div class="card border-0 shadow-sm">
                     <div class="card-header bg-transparent">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0 text-info fw-bold">MCQ Questions</h5>
+                            <h5 class="mb-0 text-info fw-bold">{{__('MCQ Questions') }}</h5>
                             <a href="{{ route('admin.mcq-questions.create', ['category_id' => $category->id]) }}"
                                 class="btn btn-info btn-sm">
-                                <i class="fas fa-plus"></i> Add Question
+                                <i class="fas fa-plus"></i> {{__('Add Question') }}
                             </a>
                         </div>
                     </div>
@@ -177,14 +177,14 @@
                                             <div class="d-flex justify-content-between align-items-start mb-2">
                                                 <div>
                                                     <h6 class="mb-1 text-info fw-bold">
-                                                        Question {{ $index + 1 }}
+                                                        {{__('Question') }} {{ $index + 1 }}
                                                         @if (!$question->is_active)
-                                                            <span class="badge bg-secondary ms-2">Inactive</span>
+                                                            <span class="badge bg-secondary ms-2">{{__('Inactive') }}</span>
                                                         @endif
                                                     </h6>
                                                     <span class="text-muted small">
-                                                        Order: {{ $question->sort_order }}
-                                                        | Score: {{ $question->score }} pts
+                                                        {{__('Order') }}: {{ $question->sort_order }}
+                                                        | {{__('Score') }}: {{ $question->score }} pts
                                                     </span>
                                                 </div>
                                                 <div class="btn-group btn-group-sm">
@@ -202,7 +202,7 @@
                                             <p class="mb-2">{{ $question->title }}</p>
 
                                             <div class="options-preview">
-                                                <small class="text-muted">Options:</small>
+                                                <small class="text-muted">{{__('Options') }}:</small>
                                                 <div class="d-flex flex-wrap gap-1 mt-1">
                                                     @foreach ($question->options as $option)
                                                         <span class="badge bg-light text-dark">
@@ -218,15 +218,15 @@
                                                 @if ($question->allows_attachments)
                                                     <span class="badge bg-primary mb-1">
                                                         {{ $question->requires_attachment ? 'Required' : 'Optional' }}
-                                                        Attachments
+                                                        {{__('Attachments') }}
                                                     </span>
                                                 @else
-                                                    <span class="badge bg-secondary mb-1">No Attachments</span>
+                                                    <span class="badge bg-secondary mb-1">{{__('No Attachments') }}</span>
                                                 @endif
 
                                                 <div class="mt-2">
                                                     <small class="text-muted">
-                                                        Added: {{ $question->created_at->format('M d, Y') }}
+                                                        {{__('Added') }}: {{ $question->created_at->format('M d, Y') }}
                                                     </small>
                                                 </div>
                                             </div>
@@ -237,11 +237,11 @@
                         @else
                             <div class="text-center py-5">
                                 <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
-                                <h5 class="text-muted">No Questions Yet</h5>
-                                <p class="text-muted">This category doesn't have any MCQ questions.</p>
+                                <h5 class="text-muted">{{__('No Questions Yet') }}</h5>
+                                <p class="text-muted">{{__("This category doesn't have any MCQ questions.") }}</p>
                                 <a href="{{ route('admin.mcq-questions.create', ['category_id' => $category->id]) }}"
                                     class="btn btn-info">
-                                    <i class="fas fa-plus"></i> Add First Question
+                                    <i class="fas fa-plus"></i> {{__('Add First Question') }}
                                 </a>
                             </div>
                         @endif

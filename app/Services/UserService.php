@@ -63,6 +63,33 @@ class UserService
     }
 
     /**
+     * Store User
+     */
+    public function store(array $data)
+    {
+        $data['password'] = bcrypt($data['password']);
+        $data['role'] = 'admin';
+        if (isset($data['image'])) {
+            $data['image'] = $data['image']->store('uploads/users', 'public');
+        }
+        $user =  $this->userRepository->create($data);
+        $user->assignRole($data['assigned_role']);
+        return $user;
+    }
+
+    public function update(User $user,array $data){
+        if(isset($data['password'])){
+            $data['password'] = bcrypt($data['password']);
+        }
+        if (isset($data['image'])) {
+            $data['image'] = $data['image']->store('uploads/users', 'public');
+        }
+        $user =  $this->userRepository->update($data,$user);
+        $user->assignRole($data['assigned_role']);
+        return $user;
+    }
+
+    /**
      * Delete user
      */
     public function delete(User $user): bool

@@ -161,7 +161,7 @@
                 }
             });
         }
-        // 🟢 استرجاع الخدمة
+
         function restoreService(serviceId) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -192,7 +192,6 @@
             });
         }
 
-        // 🔴 حذف نهائي
         function forceDeleteService(serviceId) {
             Swal.fire({
                 title: 'Are you sure?',

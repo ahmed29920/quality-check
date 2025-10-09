@@ -84,7 +84,7 @@
                         <i class="fas fa-users"></i> Users List ({{ $users->count() }} total)
                     </h6>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover mb-0">
                             <thead class="table-light">
@@ -122,7 +122,7 @@
         @endif
     </div>
 
-    
+
 @endsection
 
 @push('scripts')
@@ -168,10 +168,10 @@
     <script>
         document.getElementById('filterForm').addEventListener('submit', function(e) {
             e.preventDefault();
-        
+
             let formData = new FormData(this);
             let queryString = new URLSearchParams(formData).toString();
-        
+
             fetch('{{ route("admin.users.filter") }}?' + queryString, {
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }
             })
@@ -181,7 +181,7 @@
             })
             .catch(error => console.error(error));
         });
-        
+
         function clearFilters() {
             document.getElementById('filterForm').reset();
             document.getElementById('filterForm').dispatchEvent(new Event('submit'));
@@ -217,5 +217,5 @@
             });
         }
     </script>
-        
+
 @endpush

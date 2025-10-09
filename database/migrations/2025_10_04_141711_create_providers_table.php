@@ -22,12 +22,12 @@ return new class extends Migration
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->string('address')->nullable();
-            $table->string('website')->nullable();
+            $table->string('website_link')->nullable();
             $table->date('established_date')->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_verified')->default(false);           
+            $table->boolean('is_verified')->default(false);
             $table->string('image')->nullable();
             $table->string('pdf')->nullable();
             $table->timestamps();
